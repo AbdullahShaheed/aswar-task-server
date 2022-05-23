@@ -1,0 +1,12 @@
+{
+  "poolConnection": {
+    "host": "bwarctflwzldebmxweyz-mysql.services.clever-cloud.com",
+    "user": "uuys3ji5syafpaoq",
+    "password": "vuNesM5Ywhgkfg1o8Mpe",
+    "database": "bwarctflwzldebmxweyz",
+    "waitForConnections": true,
+    "connectionLimit": 4,
+    "queueLimit": 0
+  },
+  "jwtPrivateKey": "1234"
+}
