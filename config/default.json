@@ -8,5 +8,6 @@
     "connectionLimit": 4,
     "queueLimit": 0
   },
-  "jwtPrivateKey": "1234"
+  "jwtPrivateKey": "1234",
+  "requiresAuth": true
 }
