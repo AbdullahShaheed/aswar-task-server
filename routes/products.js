@@ -12,6 +12,21 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await db.query(
+      "SELECT * FROM products WHERE product_id = ?;",
+      [parseInt(req.params.id)]
+    );
+    if (!product[0][0])
+      return res.status(404).send("Product with the given id was not found.");
+
+    res.send(product[0][0]);
+  } catch (err) {
+    return res.status(500).send("Something goes wrong.");
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   // validate req.body
   const { error } = validateProduct(req.body);
