@@ -53,6 +53,46 @@ router.post("/", auth, async (req, res) => {
   res.send(product[0][0]);
 });
 
+router.put("/:id", auth, async (req, res) => {
+  // check existence
+  const productInDb = await db.query(
+    "SELECT * FROM products WHERE product_id = ?;",
+    [parseInt(req.params.id)]
+  );
+  if (!productInDb[0][0])
+    return res.status(404).send("Product with the given id was not found.");
+
+  //check validity
+  let product = {
+    name: req.body.name,
+    price: parseFloat(req.body.price),
+    creationDate: req.body.creationDate,
+  };
+  const { error } = validateProduct(product);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  //if everything is ok
+  try {
+    await db.query(
+      "UPDATE products SET name = ?, price = ?, creation_date = ? WHERE product_id = ?",
+      [
+        product.name,
+        product.price,
+        product.creationDate,
+        parseInt(req.params.id),
+      ]
+    );
+  } catch (error) {
+    return res.status(500).send("Something goes wrong.");
+  }
+
+  //return modified customer to client
+  product = await db.query("SELECT * FROM products WHERE product_id = ?", [
+    parseInt(req.params.id),
+  ]);
+  res.send(product[0][0]);
+});
+
 router.delete("/:id", auth, async (req, res) => {
   // check existence
   const product = await db.query(
