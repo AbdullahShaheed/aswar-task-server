@@ -38,6 +38,28 @@ router.post("/", auth, async (req, res) => {
   res.send(product[0][0]);
 });
 
+router.delete("/:id", auth, async (req, res) => {
+  // check existence
+  const product = await db.query(
+    "SELECT * FROM products WHERE product_id = ?;",
+    [parseInt(req.params.id)]
+  );
+  if (!product[0][0])
+    return res.status(404).send("Product with the given id was not found.");
+
+  //delete
+  try {
+    await db.query("DELETE FROM products WHERE product_id = ?", [
+      parseInt(req.params.id),
+    ]);
+  } catch (err) {
+    res.status(500).send("Something goes wrong.");
+  }
+
+  //return deleted product to client
+  res.send(product[0][0]);
+});
+
 function validateProduct(product) {
   const schema = Joi.object({
     name: Joi.string().required(),
