@@ -49,7 +49,10 @@ router.post("/", async (req, res) => {
   };
 
   const token = jwt.sign(payload, config.get("jwtPrivateKey"));
-  res.header("x-auth-token", token).send(payload);
+  res
+    .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
+    .send(payload);
 });
 
 function validateUser(user) {
