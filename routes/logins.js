@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     user = user[0][0];
 
     if (!user)
-      return res.status(500).send("User not found with these credentials.");
+      return res.status(404).send("User not found with these credentials.");
 
     //the user exists, so send him a token with this encoded payload
     const payload = {
