@@ -17,6 +17,12 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   try {
+    //check if email already used
+    const found = await db.query("SELECT user_id FROM users WHERE email = ?", [
+      user.email,
+    ]);
+    if (found) return res.status(400).send("User already registered.");
+
     await db.query("INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?);", [
       user.name,
       user.email,
