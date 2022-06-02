@@ -1,9 +1,18 @@
 {
-  "poolConnection": {
+  "remotePoolConnection": {
     "host": "bwarctflwzldebmxweyz-mysql.services.clever-cloud.com",
     "user": "uuys3ji5syafpaoq",
     "password": "vuNesM5Ywhgkfg1o8Mpe",
     "database": "bwarctflwzldebmxweyz",
+    "waitForConnections": true,
+    "connectionLimit": 4,
+    "queueLimit": 0
+  },
+  "localPoolConnection": {
+    "host": "localhost",
+    "user": "root",
+    "password": "Dell_1975",
+    "database": "aswar",
     "waitForConnections": true,
     "connectionLimit": 4,
     "queueLimit": 0

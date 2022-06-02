@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 
 module.exports = function createPool() {
   try {
-    const pool = mysql.createPool(config.get("poolConnection"));
+    const pool = mysql.createPool(config.get("remotePoolConnection"));
     console.log("Connected to database..");
 
     const poolPromise = pool.promise();

@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS aswar;
+
+CREATE DATABASE aswar;
+USE aswar;
+CREATE TABLE products
+(
+	product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(45) NOT NULL,
+    price DECIMAL(5,2) NOT NULL,
+    creation_date DATETIME NOT NULL
+);
+
+CREATE TABLE users
+(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(45) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(45) NOT NULL,
+    role VARCHAR(45) NOT NULL
+);
+
+
+
